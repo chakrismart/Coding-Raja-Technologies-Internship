@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senti app</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='frontend.css')}}">
+</head>
+<body>
+     <div class="heading">
+        <h1>SENTIMENT ANALYSER</h1>
+     </div>
+    <div class="review">
+        <form action="/predict" method="POST">
+            <div class="cmm">
+                <label id="text">ENTER YOUR COMMENT</label>
+                <textarea id="comment" name="comment" rows="6"></textarea>
+            </div>
+            <div class="btn">
+                <button type="submit">SUBMIT</button>
+            </div>
+        </form>
+        {% if prediction is defined %}
+          <div class="res">
+            {% if prediction == 1 %}
+                <div class="alert-success" role="alert">POSITIVE COMMENT</div>
+            {% elif prediction == -1 %}
+                <div class="alert-failure" role="alert">NEGATIVE COMMENT</div>
+            {% else %}
+                <div class="alert-neutral" role="alert">NEUTRAL COMMENT</div>
+            {% endif %}
+          </div>
+        {% endif %}
+    </div>
+    
+</body>
+</html>
